@@ -50,7 +50,11 @@ public class Sprite implements KeyListener, Runnable {
 
 		this.isPlayer = isPlayer;
 
-		image = imageN;
+		if (isPlayer)
+			image = imageN;
+		else
+			image = monsterN;
+		
 		selectImage();
 	}
 

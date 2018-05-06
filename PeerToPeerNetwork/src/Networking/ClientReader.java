@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
  *
  * @author john_shelby
  */
-public class ClientReader implements Runnable{
+public class ClientReader implements Runnable {
 
 	private static final int RETRY_TIMEOUT = 10;
 	
