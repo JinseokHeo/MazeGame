@@ -38,7 +38,6 @@ public class Player {
 		
 		Sprite myMouse = new Sprite(275, 200, 0, 0, 1); 
 		Sprite enemyMouse = new Sprite(175, 350, 0, 0, 1);
-		Sprite s = new Sprite(275, 200, 0, 0, 1); 
 		
 		FancyDrawingBoard board = new FancyDrawingBoard("Client", 200, 50, 500, 500);
 		board.registerKeyListener(myMouse);
@@ -48,7 +47,6 @@ public class Player {
 		
 		myMouse.setMessageSender(mSender);
 		mReceiver.setEnemyMouse(enemyMouse);
-		mReceiver.setEnemyMouse(s);
 		
 		new Thread(myMouse).start();
 		
@@ -57,7 +55,6 @@ public class Player {
 			board.clear();
 			myMouse.draw(g);
 			enemyMouse.draw(g);
-			s.draw(g);
 			board.repaint();
 			
 			try {
