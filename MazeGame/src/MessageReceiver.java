@@ -4,7 +4,7 @@ import java.io.*;
 
 public class MessageReceiver implements Runnable {
 
-	private Sprite enemyMouse;
+	private Sprite enemy;
 	private BufferedReader br;
 	
 	
@@ -13,7 +13,7 @@ public class MessageReceiver implements Runnable {
 	}
 	
 	
-	public void setEnemyMouse(Sprite enemyMouse){ this.enemyMouse = enemyMouse; }
+	public void setEnemy(Sprite enemy){ this.enemy = enemy; }
 	
 	
 	public void run(){
@@ -21,9 +21,9 @@ public class MessageReceiver implements Runnable {
 		while(true){
 			try {
 				message = br.readLine();
-				if(enemyMouse!=null) enemyMouse.update(message);
+				if(enemy!=null) enemy.update(message);
 			} catch (IOException e) {
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
 			
 		}

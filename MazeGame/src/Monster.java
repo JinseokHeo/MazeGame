@@ -32,28 +32,27 @@ public class Monster {
 		
 		connect();
 		
-		Sprite myMouse = new Sprite(175, 350, 0, 0, 1, false);
-		Sprite enemyMouse = new Sprite(275, 200, 0, 0, 1, true);
+		Sprite monster = new Sprite(275, 25, 0, 0, 1, false);
+		Sprite player = new Sprite(275, 475, 0, 0, 1, true);
 		
-		FancyDrawingBoard board = new FancyDrawingBoard("Server", 200, 50, 500, 500);
-		board.registerKeyListener(myMouse);
+		FancyDrawingBoard board = new FancyDrawingBoard("Monster", 200, 50, 500, 500);
+		board.registerKeyListener(monster);
 		Graphics g = board.getLowerCanvas();
 		
 		Maze maze = new Maze();
-		myMouse.setMaze(maze);
-		enemyMouse.setMaze(maze);
+		monster.setMaze(maze);
+		player.setMaze(maze);
 		
-		myMouse.setMessageSender(mSender);
-		mReceiver.setEnemyMouse(enemyMouse);
+		monster.setMessageSender(mSender);
+		mReceiver.setEnemy(player);
 
 		
-		new Thread(myMouse).start();
+		new Thread(monster).start();
 		
 		while(true){
-			
 			board.clear();
-			myMouse.draw(g);
-			enemyMouse.draw(g);
+			monster.draw(g);
+			player.draw(g);
 			maze.draw(g);
 
 			board.repaint();

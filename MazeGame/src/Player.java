@@ -88,27 +88,27 @@ public class Player {
 		getInfo();
 
 		System.out.println(portNumber);
-		Sprite myMouse = new Sprite(275, 200, 0, 0, 1, true); 
-		Sprite enemyMouse = new Sprite(175, 350, 0, 0, 1, false);
+		Sprite player = new Sprite(275, 475, 0, 0, 1, true); 
+		Sprite monster = new Sprite(275, 25, 0, 0, 1, false);
 
-		FancyDrawingBoard board = new FancyDrawingBoard("Client", 200, 50, 500, 500);
-		board.registerKeyListener(myMouse);
+		FancyDrawingBoard board = new FancyDrawingBoard("Player", 200, 50, 500, 500);
+		board.registerKeyListener(player);
 		Graphics g = board.getLowerCanvas();
 
 		Maze maze = new Maze();
-		myMouse.setMaze(maze);
-		enemyMouse.setMaze(maze);
+		player.setMaze(maze);
+		monster.setMaze(maze);
 
-		myMouse.setMessageSender(mSender);
-		mReceiver.setEnemyMouse(enemyMouse);
+		player.setMessageSender(mSender);
+		mReceiver.setEnemy(monster);
 
-		new Thread(myMouse).start();
+		new Thread(player).start();
 
 		while(true){
 
 			board.clear();
-			myMouse.draw(g);
-			enemyMouse.draw(g);
+			player.draw(g);
+			monster.draw(g);
 			maze.draw(g);
 
 			board.repaint();

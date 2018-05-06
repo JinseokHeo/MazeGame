@@ -9,33 +9,31 @@ import javax.swing.ImageIcon;
 
 public class Sprite implements KeyListener, Runnable {
 
-	public static Image imageE, imageW, imageS, imageN, monsterE, monsterW, monsterS, monsterN;
+	public static Image playerE, playerW, playerS, playerN, monsterE, monsterW, monsterS, monsterN;
 	public static int size;
 
-	private int x, y; // center of the mouse
-	private int stepSize; // speed of mouse movement.
+	private int x, y; // center of the player
+	private int stepSize; // speed of player movement.
 	private int xSpeed, ySpeed; // +1, 0, -1.
 	private Image image; 
 
 	private MessageSender mSender;
-	private boolean shouldBreakWall;
-
 	private Maze maze;
 
 	private boolean isPlayer;
 
 	static {
-		imageE = new ImageIcon("tinyMouseE.png").getImage();
-		imageW = new ImageIcon("tinyMouseW.png").getImage();
-		imageS = new ImageIcon("tinyMouseS.png").getImage();
-		imageN = new ImageIcon("tinyMouseN.png").getImage();
-		
+		playerE = new ImageIcon("tinyMouseE.png").getImage();
+		playerW = new ImageIcon("tinyMouseW.png").getImage();
+		playerS = new ImageIcon("tinyMouseS.png").getImage();
+		playerN = new ImageIcon("tinyMouseN.png").getImage();
+
 		monsterE = new ImageIcon("monsterE.png").getImage();
 		monsterW = new ImageIcon("monsterW.png").getImage();
 		monsterN = new ImageIcon("monsterN.png").getImage();
 		monsterS = new ImageIcon("monsterS.png").getImage();
-		
-		size = imageN.getWidth(null);
+
+		size = playerN.getWidth(null);
 
 	}
 
@@ -51,10 +49,10 @@ public class Sprite implements KeyListener, Runnable {
 		this.isPlayer = isPlayer;
 
 		if (isPlayer)
-			image = imageN;
+			image = playerN;
 		else
 			image = monsterN;
-		
+
 		selectImage();
 	}
 
@@ -63,11 +61,12 @@ public class Sprite implements KeyListener, Runnable {
 
 
 	private void selectImage(){
+		if(xSpeed+ySpeed!=0)
 		if(isPlayer) {
-			if(xSpeed>0) image = imageE;
-			else if(xSpeed<0) image = imageW;
-			else if(ySpeed>0) image = imageS;
-			else if(ySpeed<0) image = imageN;
+			if(xSpeed>0) image = playerE;
+			else if(xSpeed<0) image = playerW;
+			else if(ySpeed>0) image = playerS;
+			else if(ySpeed<0) image = playerN;
 		}
 		else {
 			if(xSpeed>0) image = monsterE;
@@ -92,32 +91,35 @@ public class Sprite implements KeyListener, Runnable {
 		this.maze = maze;
 	}
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode()==KeyEvent.VK_LEFT){
+		if(e.getKeyCode()==KeyEvent.VK_A){
 			xSpeed = -1;
 			ySpeed = 0;
 		}
-		else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+		else if(e.getKeyCode()==KeyEvent.VK_D){
 			xSpeed = 1;
 			ySpeed = 0;
 		}
-		else if(e.getKeyCode()==KeyEvent.VK_UP){
+		else if(e.getKeyCode()==KeyEvent.VK_W){
 			xSpeed = 0;
 			ySpeed = -1;
 		}
-		else if(e.getKeyCode()==KeyEvent.VK_DOWN){
+		else if(e.getKeyCode()==KeyEvent.VK_S){
 			xSpeed = 0;
 			ySpeed = 1;
 		}
-		else if(e.getKeyCode()==KeyEvent.VK_B){
-			shouldBreakWall = true;
-		}
+//		else if(e.getKeyCode()==KeyEvent.VK_B){
+//			shouldBreakWall = true;
+//		}
 
 		selectImage();
 	}
-
-
 	public void keyTyped(KeyEvent e) {}
-	public void keyReleased(KeyEvent e) {}
+	public void keyReleased(KeyEvent e) {
+		if(xSpeed+ySpeed!=0 && (e.getKeyCode()==KeyEvent.VK_A || e.getKeyCode()==KeyEvent.VK_D || e.getKeyCode()==KeyEvent.VK_W || e.getKeyCode()==KeyEvent.VK_S)) {
+			xSpeed = 0;
+			ySpeed = 0;
+		}
+	}
 
 
 	public void update(String message){
@@ -128,9 +130,7 @@ public class Sprite implements KeyListener, Runnable {
 		y = Integer.parseInt(message.substring(commaPos1+1, commaPos2));
 		commaPos3 = message.indexOf(',', commaPos2+1);
 		xSpeed = Integer.parseInt(message.substring(commaPos2+1, commaPos3));
-		commaPos4 = message.indexOf(',', commaPos3+1);
-		ySpeed = Integer.parseInt(message.substring(commaPos3+1, commaPos4));
-		shouldBreakWall = Boolean.parseBoolean(message.substring(commaPos4+1));
+		ySpeed = Integer.parseInt(message.substring(commaPos3+1));
 
 
 		selectImage();
@@ -178,11 +178,10 @@ public class Sprite implements KeyListener, Runnable {
 	public void run(){
 		while(true){
 			if(!isCollided()) {
-				x+=xSpeed;
-				y+=ySpeed;
+				move();
 			}
 			//send x, y, xspeed, ySpeed over the network.
-			mSender.send(x + "," + y + "," + xSpeed + "," + ySpeed + "," + shouldBreakWall);
+			mSender.send(x + "," + y + "," + xSpeed + "," + ySpeed);
 
 
 			// check collision any prize.
