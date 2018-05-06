@@ -15,11 +15,13 @@ public class Player {
 	
 	private static void connect(){
 		try {
-			Scanner in = new Scanner(System.in);
-			System.out.println("Enter monster IP address");
-			IPAddress = in.nextLine();
-			System.out.println("Enter in monster port number");
-			portNumber = in.nextInt();
+//			Scanner in = new Scanner(System.in);
+//			System.out.println("Enter monster IP address");
+//			IPAddress = in.nextLine();
+//			System.out.println("Enter in monster port number");
+//			portNumber = in.nextInt();
+			
+			
 			
 			
 			Socket s = new Socket(IPAddress, portNumber);
@@ -33,7 +35,7 @@ public class Player {
 	}
 	
 	
-	public static void main(String[] args) {
+	public Player() {
 		connect();
 		
 		Sprite myMouse = new Sprite(275, 200, 0, 0, 1); 
