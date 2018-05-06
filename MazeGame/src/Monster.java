@@ -13,7 +13,7 @@ public class Monster {
 	
 	
 	private static void connect(){
-		
+				
 		try {
 			Socket s = new ServerSocket(portNumber).accept();
 			mSender = new MessageSender(s.getOutputStream());
@@ -23,6 +23,7 @@ public class Monster {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	
