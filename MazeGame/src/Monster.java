@@ -32,13 +32,16 @@ public class Monster {
 		
 		connect();
 		
-		Sprite myMouse = new Sprite(175, 350, 0, 0, 1);
-		Sprite enemyMouse = new Sprite(275, 200, 0, 0, 1);
+		Sprite myMouse = new Sprite(175, 350, 0, 0, 1, false);
+		Sprite enemyMouse = new Sprite(275, 200, 0, 0, 1, true);
 		
 		FancyDrawingBoard board = new FancyDrawingBoard("Server", 200, 50, 500, 500);
 		board.registerKeyListener(myMouse);
 		Graphics g = board.getLowerCanvas();
 		
+		Maze maze = new Maze();
+		myMouse.setMaze(maze);
+		enemyMouse.setMaze(maze);
 		
 		myMouse.setMessageSender(mSender);
 		mReceiver.setEnemyMouse(enemyMouse);
@@ -51,6 +54,8 @@ public class Monster {
 			board.clear();
 			myMouse.draw(g);
 			enemyMouse.draw(g);
+			maze.draw(g);
+
 			board.repaint();
 			
 			try {
