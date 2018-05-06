@@ -50,6 +50,7 @@ public class Sprite implements KeyListener, Runnable {
 
 		this.isPlayer = isPlayer;
 
+		
 		image = imageN;
 		selectImage();
 	}
@@ -134,7 +135,7 @@ public class Sprite implements KeyListener, Runnable {
 
 
 	public boolean isCollided(){
-		int threshold = Maze.THICKNESS - 2;
+		int threshold = Maze.THICKNESS - 6;
 
 		int noseX, noseY, i;
 		if(xSpeed!=0){ // horizontal move
