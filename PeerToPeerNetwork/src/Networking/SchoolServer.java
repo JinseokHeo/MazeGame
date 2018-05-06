@@ -17,6 +17,7 @@ import java.io.*;
  */
 public class SchoolServer {
 
+	// Port number
 	private int port;
 	
     private boolean listening;
@@ -27,8 +28,8 @@ public class SchoolServer {
     private ArrayList<NetworkListener> listeners;
 
     public SchoolServer(boolean peerToPeerMode, int port) {
-    	this.port = port;
-    	this.peerToPeerMode = peerToPeerMode;
+    		this.port = port;
+    		this.peerToPeerMode = peerToPeerMode;
         listening = false;
         this.writers = new ArrayList<ClientWriter>();
         this.readers = new ArrayList<ClientReader>();
