@@ -107,8 +107,8 @@ public class Player {
 		while(true){
 
 			board.clear();
-			player.draw(g);
 			monster.draw(g);
+			player.draw(g);
 			maze.draw(g);
 
 			board.repaint();

@@ -12,8 +12,8 @@ public class Sprite implements KeyListener, Runnable {
 	public static Image playerE, playerW, playerS, playerN, monsterE, monsterW, monsterS, monsterN;
 	public static int size;
 
-	private int x, y; // center of the player
-	private int stepSize; // speed of player movement.
+	private int x, y; // center of the sprite
+	private int stepSize; // speed of sprite movement.
 	private int xSpeed, ySpeed; // +1, 0, -1.
 	private Image image; 
 
