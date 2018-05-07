@@ -1,4 +1,4 @@
-package Networking;
+package shelby_networking;
 
 public interface NetworkListener {
 

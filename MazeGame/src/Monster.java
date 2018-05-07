@@ -5,6 +5,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
+import gameElements.Maze;
+import gameElements.Sprite;
+
 public class Monster {
 
 	private static int portNumber = 5454;

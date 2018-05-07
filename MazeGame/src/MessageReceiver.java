@@ -1,6 +1,8 @@
 
 import java.io.*;
 
+import gameElements.Sprite;
+
 
 public class MessageReceiver implements Runnable {
 

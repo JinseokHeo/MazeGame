@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package Networking;
+package shelby_networking;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;

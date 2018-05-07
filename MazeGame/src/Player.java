@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import gameElements.Maze;
+import gameElements.Sprite;
+
 public class Player {
 
 	private static String IPAddress = "localhost";
