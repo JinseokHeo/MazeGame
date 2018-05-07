@@ -112,7 +112,6 @@ public class Sprite implements KeyListener, Runnable {
 			ySpeed = 1;
 		} else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if(!isPlayer) {
-				System.out.println("trap!");
 				trap.setTrap(x, y);
 			}
 		}
