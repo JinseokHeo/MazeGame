@@ -1,13 +1,15 @@
 package gameElements;
 
 import java.awt.Graphics;
+
+
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 
-import MessageSender;
+import general.MessageSender;
 
 
 public class Sprite implements KeyListener, Runnable {
@@ -132,6 +134,10 @@ public class Sprite implements KeyListener, Runnable {
 		}
 	}
 
+	
+	public void increaseStep(double increment) {
+		stepSize+=increment;
+	}
 
 	public void update(String message){
 		int commaPos1, commaPos2, commaPos3, commaPos4;
