@@ -21,6 +21,8 @@ public class Sprite implements KeyListener, Runnable {
 	private Maze maze;
 
 	private boolean isPlayer;
+	
+	private Trap trap;
 
 	static {
 		playerE = new ImageIcon("tinyMouseE.png").getImage();
@@ -52,6 +54,7 @@ public class Sprite implements KeyListener, Runnable {
 			image = playerN;
 		else
 			image = monsterN;
+			trap = new MonsterTrap();
 
 		selectImage();
 	}
@@ -85,6 +88,7 @@ public class Sprite implements KeyListener, Runnable {
 
 	public void draw(Graphics g){
 		g.drawImage(image, x-size/2, y-size/2, null);
+		trap.draw(g);
 	}
 
 	public void setMaze(Maze maze) {
@@ -106,6 +110,11 @@ public class Sprite implements KeyListener, Runnable {
 		else if(e.getKeyCode()==KeyEvent.VK_S){
 			xSpeed = 0;
 			ySpeed = 1;
+		} else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+			if(!isPlayer) {
+				System.out.println("trap!");
+				trap.setTrap(x, y);
+			}
 		}
 //		else if(e.getKeyCode()==KeyEvent.VK_B){
 //			shouldBreakWall = true;

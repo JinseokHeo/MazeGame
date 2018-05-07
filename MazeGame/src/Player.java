@@ -20,11 +20,16 @@ public class Player {
 	private static MessageReceiver mReceiver;
 
 	private void getInfo() {
+		/*
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter monster IP address");
 		IPAddress = in.nextLine();
 		System.out.println("Enter in monster port number");
 		portNumber = in.nextInt();
+		connect();
+		*/
+		IPAddress = "192.168.1.173";
+		portNumber = 5454;
 		connect();
 
 		//		JFrame window = new JFrame("Enter game info");
