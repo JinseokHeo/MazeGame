@@ -140,15 +140,19 @@ public class Sprite implements KeyListener, Runnable {
 	}
 
 	public void update(String message){
-		int commaPos1, commaPos2, commaPos3, commaPos4;
+		int commaPos1, commaPos2, commaPos3, commaPos4, commaPos5;
 		commaPos1 = message.indexOf(',');
 		x = Integer.parseInt(message.substring(0, commaPos1));
 		commaPos2 = message.indexOf(',', commaPos1+1);
 		y = Integer.parseInt(message.substring(commaPos1+1, commaPos2));
 		commaPos3 = message.indexOf(',', commaPos2+1);
 		xSpeed = Integer.parseInt(message.substring(commaPos2+1, commaPos3));
-		ySpeed = Integer.parseInt(message.substring(commaPos3+1));
-
+		commaPos4 = message.indexOf(',', commaPos3+1);
+		ySpeed = Integer.parseInt(message.substring(commaPos3+1, commaPos4));
+		commaPos5 = message.indexOf(',', commaPos4+1);
+		int trapX = Integer.parseInt(message.substring(commaPos4+1, commaPos5));
+		int trapY = Integer.parseInt(message.substring(commaPos5+1));
+		trap.setTrap(trapX, trapY);
 
 		selectImage();
 	}
@@ -192,13 +196,21 @@ public class Sprite implements KeyListener, Runnable {
 		return false;
 	}
 
+	public void isTrapped() {
+		if(isPlayer) {
+			if(trap.isCollided(x, y)) {
+				
+			}
+		}
+	}
+	
 	public void run(){
 		while(true){
 			if(!isCollided()) {
 				move();
 			}
 			//send x, y, xspeed, ySpeed over the network.
-			mSender.send(x + "," + y + "," + xSpeed + "," + ySpeed);
+			mSender.send(x + "," + y + "," + xSpeed + "," + ySpeed + "," + trap.getX() + "," + trap.getY());
 
 
 			// check collision any prize.

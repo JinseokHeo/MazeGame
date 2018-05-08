@@ -12,8 +12,6 @@ public abstract class  Trap {
 	public Trap() {
 		x = -1;
 		y = -1;
-		
-		this.image = image;
 	}
 	
 	public Trap(int x, int y, Image image) {
@@ -34,6 +32,18 @@ public abstract class  Trap {
 		this.y = y-height/2;
 	}
 
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
 	public boolean isCollided(int SpriteX, int SpriteY) {
 		if(SpriteX < x || SpriteX >= x + width || SpriteY < y || SpriteY >= y + height) {
 			return true;
