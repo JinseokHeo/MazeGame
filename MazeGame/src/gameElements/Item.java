@@ -12,7 +12,7 @@ public abstract class Item{
 		this.locY = locY;
 	}
 	
-	public abstract void consume(Sprite sprite);
+	public abstract void consume(Sprite sprite); 
 	
 	public abstract void draw(Graphics g);
 }
