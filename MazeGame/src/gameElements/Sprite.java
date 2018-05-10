@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -62,7 +63,8 @@ public class Sprite implements KeyListener, Runnable {
 			image = playerN;
 		else
 			image = monsterN;
-			trap = new MonsterTrap();
+		
+		trap = new MonsterTrap();
 
 		selectImage();
 	}
@@ -102,7 +104,9 @@ public class Sprite implements KeyListener, Runnable {
 
 	public void draw(Graphics g){
 		g.drawImage(image, x-size/2, y-size/2, null);
-		trap.draw(g);
+		if(!isPlayer) {
+			trap.draw(g);
+		}
 	}
 
 	public void setMaze(Maze maze) {
@@ -162,7 +166,7 @@ public class Sprite implements KeyListener, Runnable {
 		int trapX = Integer.parseInt(message.substring(commaPos4+1, commaPos5));
 		int trapY = Integer.parseInt(message.substring(commaPos5+1));
 		trap.setTrap(trapX, trapY);
-
+		
 		selectImage();
 	}
 
@@ -206,18 +210,25 @@ public class Sprite implements KeyListener, Runnable {
 	}
 
 	public void isTrapped() {
+		//System.out.println(x + "," + y + "," + xSpeed + "," + ySpeed + "," + trap.getX() + "," + trap.getY());
 		if(isPlayer) {
 			if(trap.getHitbox().intersects(getHitbox())) {
-				System.out.println("trap!");
 				isTrapped = true;
 			}
 		}
 	}
 	
 	public Rectangle getHitbox() {
-        return new Rectangle(x-20, y-20, 40, 40);
+        return new Rectangle(x-size/2+5, y-size/2+5, size-5, size-5);
     }
 
+	public Point getTrap() {
+		return new Point(trap.getX(), trap.getY());
+	}
+	
+	public void setTrap(int x, int y) {
+		trap.setTrap(x, y);
+	}
 	
 	public void run(){
 		while(true){

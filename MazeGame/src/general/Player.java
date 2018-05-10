@@ -95,7 +95,7 @@ public class Player {
 		System.out.println(portNumber);
 		Sprite player = new Sprite(275, 475, 0, 0, 1, true); 
 		Sprite monster = new Sprite(275, 25, 0, 0, 1, false);
-
+		
 		FancyDrawingBoard board = new FancyDrawingBoard("Player", 200, 50, 500, 500);
 		board.registerKeyListener(player);
 		Graphics g = board.getLowerCanvas();
@@ -115,6 +115,8 @@ public class Player {
 			monster.draw(g);
 			player.draw(g);
 			maze.draw(g);
+			
+			player.setTrap(monster.getTrap().x, monster.getTrap().y);
 			player.isTrapped();
 
 			board.repaint();
