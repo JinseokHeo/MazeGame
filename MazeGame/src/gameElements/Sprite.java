@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -28,6 +29,8 @@ public class Sprite implements KeyListener, Runnable {
 	private boolean isPlayer;
 	
 	private Trap trap;
+	
+	private boolean isTrapped = false;
 
 	static {
 		playerE = new ImageIcon("tinyMouseE.png").getImage();
@@ -69,18 +72,24 @@ public class Sprite implements KeyListener, Runnable {
 
 
 	private void selectImage(){
-		if(xSpeed+ySpeed!=0)
-		if(isPlayer) {
-			if(xSpeed>0) image = playerE;
-			else if(xSpeed<0) image = playerW;
-			else if(ySpeed>0) image = playerS;
-			else if(ySpeed<0) image = playerN;
+		if(isTrapped) {
+			xSpeed = 0;
+			ySpeed = 0;
 		}
-		else {
-			if(xSpeed>0) image = monsterE;
-			else if(xSpeed<0) image = monsterW;
-			else if(ySpeed>0) image = monsterS;
-			else if(ySpeed<0) image = monsterN;
+		
+		if(xSpeed+ySpeed!=0) {
+			if(isPlayer) {
+				if(xSpeed>0) image = playerE;
+				else if(xSpeed<0) image = playerW;
+				else if(ySpeed>0) image = playerS;
+				else if(ySpeed<0) image = playerN;
+			}
+			else {
+				if(xSpeed>0) image = monsterE;
+				else if(xSpeed<0) image = monsterW;
+				else if(ySpeed>0) image = monsterS;
+				else if(ySpeed<0) image = monsterN;
+			}
 		}
 	}
 
@@ -198,11 +207,17 @@ public class Sprite implements KeyListener, Runnable {
 
 	public void isTrapped() {
 		if(isPlayer) {
-			if(trap.isCollided(x, y)) {
-				
+			if(trap.getHitbox().intersects(getHitbox())) {
+				System.out.println("trap!");
+				isTrapped = true;
 			}
 		}
 	}
+	
+	public Rectangle getHitbox() {
+        return new Rectangle(x-20, y-20, 40, 40);
+    }
+
 	
 	public void run(){
 		while(true){

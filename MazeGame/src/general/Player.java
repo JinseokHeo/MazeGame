@@ -115,6 +115,7 @@ public class Player {
 			monster.draw(g);
 			player.draw(g);
 			maze.draw(g);
+			player.isTrapped();
 
 			board.repaint();
 

@@ -1,6 +1,7 @@
 package gameElements;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 public abstract class  Trap {
 	
@@ -44,10 +45,7 @@ public abstract class  Trap {
 		return y;
 	}
 	
-	public boolean isCollided(int SpriteX, int SpriteY) {
-		if(SpriteX < x || SpriteX >= x + width || SpriteY < y || SpriteY >= y + height) {
-			return true;
-		}
-		return false;
-	}
+	public Rectangle getHitbox() {
+        return new Rectangle(x, y, width, height);
+    }
 }
